@@ -22,16 +22,21 @@
                                  :main foo.bar
                                  :optimizations :advanced
                                  :pretty-print false
-                                 :language-in :ecmascript5}}}}
+                                 :language-in :ecmascript5}}
+               "dev" {:source-paths ["src"]
+                      :compiler {:main foo.bar
+                                 :asset-path "/js/"
+                                 :output-to "target/classes/public/js/viewer.js"
+                                 :output-dir "target/classes/public/js/"
+                                 :source-map-timestamp true
+                                 ;:infer-externs true
+                                 ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
+                                 ;; https://github.com/binaryage/cljs-devtools
+                                 :preloads [devtools.preload]}}}}
 
   :figwheel {:builds [{:id "dev"
                        :source-paths ["src"]
-
-                       ;; the presence of a :figwheel configuration here
-                       ;; will cause figwheel to inject the figwheel client
-                       ;; into your build
                        :figwheel {:on-jsload "foo.bar/on-js-reload"}
-
                        :compiler {:main foo.bar
                                   :asset-path "/js/"
                                   :output-to "target/classes/public/js/viewer.js"
